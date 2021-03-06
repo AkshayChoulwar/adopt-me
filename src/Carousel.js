@@ -8,6 +8,8 @@ export default class Carousel extends Component {
       photos: [],
       active: 0,
     };
+
+    this.handleIndexClick = this.handleIndexClick.bind(this);
   }
 
   static getDerivedStateFromProps({ media }) {
@@ -20,11 +22,11 @@ export default class Carousel extends Component {
     return { photos };
   }
 
-  handleIndexClick = (event) => {
+  handleIndexClick(event) {
     this.setState({
       active: +event.target.dataset.index,
     });
-  };
+  }
 
   render() {
     const { photos, active } = this.state;
@@ -33,15 +35,17 @@ export default class Carousel extends Component {
         <img src={photos[active]} alt="animal"></img>
         <div className="carousel-smaller">
           {photos.map((photo, index) => {
-            // eslint-disable-next-line
-            <img
-              key={photo}
-              onClick={this.handleIndexClick}
-              src={photo}
-              data-index={index}
-              className={index === active ? "active" : ""}
-              alt="animal"
-            ></img>;
+            return (
+              // eslint-disable-next-line
+              <img
+                key={photo}
+                onClick={this.handleIndexClick}
+                src={photo}
+                data-index={index}
+                className={index === active ? "active" : ""}
+                alt="animal"
+              ></img>
+            );
           })}
         </div>
       </div>
